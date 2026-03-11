@@ -11,6 +11,12 @@ const gameState = {
 
 const campScreen = document.querySelector("#camp-screen");
 const combatScreen = document.querySelector("#combat-screen");
+const roleSelectScreen = document.querySelector("#role-select-screen");
+const charSelectScreen = document.querySelector("#char-select-screen");
+const charListEl = document.querySelector("#char-list");
+const btnBackToRoles = document.querySelector("#back-to-roles");
+const notificationArea = document.querySelector("#notification-area");
+const roleCards = document.querySelectorAll(".role-card");
 const deckPileEl = document.querySelector("#deck-pile");
 const discardPileEl = document.querySelector("#discard-pile");
 const handEl = document.querySelector("#hand");
@@ -18,6 +24,23 @@ const endTurnBtn = document.querySelector("#end-turn-btn");
 const exploreBtn = Array.from(document.querySelectorAll(".action-btn")).find((button) =>
   button.textContent.includes("Explorar")
 );
+
+let selectedRole = null;
+
+function showNotification(msg) {
+  if (!notificationArea) {
+    return;
+  }
+
+  const notifEl = document.createElement("div");
+  notifEl.className = "in-game-notif";
+  notifEl.textContent = msg;
+  notificationArea.appendChild(notifEl);
+
+  setTimeout(() => {
+    notifEl.remove();
+  }, 2500);
+}
 
 function shuffleDeck(deck) {
   for (let i = deck.length - 1; i > 0; i -= 1) {
@@ -27,10 +50,6 @@ function shuffleDeck(deck) {
 }
 
 function initEntities() {
-  gameState.player = JSON.parse(JSON.stringify(charactersData["caballero"]));
-  gameState.player.hpActual = gameState.player.stats.hp;
-  gameState.player.epActual = gameState.player.stats.ep;
-
   const currentZone = mapData[0];
 
   if (gameState.battlesWon > 0 && gameState.battlesWon % 3 === 0) {
@@ -40,7 +59,60 @@ function initEntities() {
     gameState.enemy = JSON.parse(JSON.stringify(currentZone.newEnemies[randomIndex]));
   }
 
+  // Escalado Infinito: +20% de stats por cada batalla ganada
+  const scale = 1 + (gameState.battlesWon * 0.20);
+  gameState.enemy.hp = Math.floor(gameState.enemy.hp * scale);
+  gameState.enemy.atk = Math.floor(gameState.enemy.atk * scale);
   gameState.enemy.hpActual = gameState.enemy.hp;
+}
+
+function selectCharacter(charKey) {
+  gameState.player = JSON.parse(JSON.stringify(charactersData[charKey]));
+  gameState.player.hpActual = gameState.player.stats.hp;
+  gameState.player.epActual = gameState.player.stats.ep;
+
+  charSelectScreen.classList.remove("is-visible");
+  campScreen.classList.add("is-visible");
+}
+
+function renderCharList(role) {
+  if (!charListEl) {
+    return;
+  }
+
+  charListEl.innerHTML = "";
+
+  Object.keys(charactersData).forEach((key) => {
+    const charData = charactersData[key];
+    if (charData.role !== role) {
+      return;
+    }
+
+    const charCard = document.createElement("div");
+    charCard.className = "char-card";
+    charCard.innerHTML = `
+      <h3 class="char-name">${charData.name}</h3>
+      <div class="char-role">${charData.role}</div>
+      <p class="char-desc">${charData.desc}</p>
+    `;
+
+    charCard.addEventListener('click', () => selectCharacter(key));
+    charListEl.appendChild(charCard);
+  });
+}
+
+function showRoleSelection() {
+  selectedRole = null;
+  charSelectScreen.classList.remove("is-visible");
+  campScreen.classList.remove("is-visible");
+  roleSelectScreen.classList.add("is-visible");
+}
+
+function openCharacterSelection(role) {
+  selectedRole = role;
+  roleSelectScreen.classList.remove("is-visible");
+  charSelectScreen.classList.add("is-visible");
+  renderCharList(role);
 }
 
 function initDeck() {
@@ -48,28 +120,12 @@ function initDeck() {
   gameState.hand = [];
   gameState.discardPile = [];
 
-  const classSkillsById = {};
   Object.keys(skillsData).forEach((skillKey) => {
     const skill = skillsData[skillKey];
+    // Si la carta pertenece a la clase del jugador, metemos 2 copias al mazo
     if (skill.class === gameState.player.role) {
-      classSkillsById[skill.id] = skill;
-    }
-  });
-
-  const testDeckRecipe = [
-    ["golpe_brutal", 3],
-    ["grito_guerra", 2],
-    ["corte_cruzado", 1]
-  ];
-
-  testDeckRecipe.forEach(([skillId, amount]) => {
-    const baseSkill = classSkillsById[skillId];
-    if (!baseSkill) {
-      return;
-    }
-
-    for (let i = 0; i < amount; i += 1) {
-      gameState.deck.push(JSON.parse(JSON.stringify(baseSkill)));
+      gameState.deck.push(JSON.parse(JSON.stringify(skill)));
+      gameState.deck.push(JSON.parse(JSON.stringify(skill)));
     }
   });
 
@@ -169,6 +225,15 @@ function updateStatsUI() {
       enemyHpTextEl.textContent = `HP: ${gameState.enemy.hpActual} / ${gameState.enemy.hp}`;
     }
   }
+
+  const enemyPortraitEl = document.querySelector(".enemy-portrait");
+  if (enemyPortraitEl && gameState.enemy.img) {
+    enemyPortraitEl.innerHTML = `<img src="${gameState.enemy.img}" style="width:100%;height:100%;object-fit:contain;" onerror="this.parentElement.innerHTML='ENEMIGO';">`;
+  }
+  const playerPortraitEl = document.querySelector(".player-portrait");
+  if (playerPortraitEl && gameState.player.imgs && gameState.player.imgs.combat) {
+    playerPortraitEl.innerHTML = `<img src="${gameState.player.imgs.combat}" style="width:100%;height:100%;object-fit:contain;" onerror="this.parentElement.innerHTML='HEROE';">`;
+  }
 }
 
 function endCombat() {
@@ -198,12 +263,12 @@ function enemyTurn() {
 
   gameState.player.hpActual = Math.max(0, gameState.player.hpActual - dmg);
 
-  alert('¡El ' + gameState.enemy.name + ' ataca y te hace ' + dmg + ' de daño!');
+  showNotification('¡El ' + gameState.enemy.name + ' ataca y te hace ' + dmg + ' de dano!');
 
   updateStatsUI();
 
   if (gameState.player.hpActual <= 0) {
-    alert('💀 Has muerto...');
+    showNotification('💀 Has muerto...');
     endCombat();
     return;
   }
@@ -227,7 +292,7 @@ function playCard(index) {
   }
 
   if (gameState.player.epActual < card.cost) {
-    alert('¡No tienes suficiente Energía!');
+    showNotification('¡No tienes suficiente Energia!');
     return;
   }
 
@@ -235,22 +300,45 @@ function playCard(index) {
 
   let damage = 0;
   switch (card.id) {
-    case 'golpe_brutal':
-      damage = Math.floor(gameState.player.stats.ad * combatFormulas.golpeBrutalMultiplier);
-      break;
-    case 'corte_cruzado':
-      damage = Math.floor(
-        gameState.player.stats.ad
-          * combatFormulas.corteCruzadoMultiplier
-          * combatFormulas.corteCruzadoHits
-      );
-      break;
-    case 'grito_guerra':
-      gameState.player.stats.armor += combatFormulas.defBuffBonus;
-      alert('¡Defensa aumentada!');
-      break;
-    default:
-      break;
+    // --- CARTAS DE GUERRERO ---
+    case 'golpe_brutal': damage = Math.floor(gameState.player.stats.ad * combatFormulas.golpeBrutalMultiplier); break;
+    case 'corte_cruzado': damage = Math.floor(gameState.player.stats.ad * combatFormulas.corteCruzadoMultiplier * combatFormulas.corteCruzadoHits); break;
+    case 'grito_guerra': gameState.player.stats.armor += combatFormulas.defBuffBonus; showNotification('¡Defensa aumentada!'); break;
+    case 'piel_hierro': gameState.player.stats.armor += 5; gameState.player.hpActual = Math.min(gameState.player.stats.hp, gameState.player.hpActual + 10); showNotification('¡Piel de Hierro (+Def, +Cura)!'); break;
+
+    // --- CARTAS DE ARQUERO ---
+    case 'tiro_doble': damage = Math.floor(gameState.player.stats.ad * combatFormulas.tiroDobleMultiplier * combatFormulas.tiroDobleHits); break;
+    case 'lluvia_flechas': damage = Math.floor(gameState.player.stats.ad * combatFormulas.lluviaFlechasMultiplier * combatFormulas.lluviaFlechasHits); break;
+    case 'flecha_venenosa': damage = Math.floor(gameState.player.stats.ad * combatFormulas.flechaVenenosaMultiplier); showNotification('¡Enemigo envenenado!'); break;
+    case 'trampa_espinas': damage = Math.floor(gameState.player.stats.ad * combatFormulas.trampaEspinasMultiplier); showNotification('¡Trampa letal activada!'); break;
+
+    // --- CARTAS DE MAGO (Usan AP en lugar de AD) ---
+    case 'fuego': damage = Math.floor(gameState.player.stats.ap * combatFormulas.fuegoMultiplier); break;
+    case 'meteorito': damage = Math.floor(gameState.player.stats.ap * combatFormulas.meteoritoMultiplier); break;
+    case 'curar': 
+        const cura = Math.floor((gameState.player.stats.ap * combatFormulas.curarMultiplier) + combatFormulas.curarBonus);
+        gameState.player.hpActual = Math.min(gameState.player.stats.hp, gameState.player.hpActual + cura); 
+        showNotification('¡Te has curado ' + cura + ' HP!'); 
+        break;
+    case 'drenar_vida':
+        damage = Math.floor(gameState.player.stats.ap * combatFormulas.drenarVidaMultiplier);
+        const robo = Math.floor(damage * combatFormulas.drenarVidaHealPercent);
+        gameState.player.hpActual = Math.min(gameState.player.stats.hp, gameState.player.hpActual + robo);
+        showNotification('¡Drenaste ' + robo + ' HP!');
+        break;
+  }
+
+  if (damage > 0 && card.type && gameState.enemy.type) {
+    const elementMatrix = combatFormulas.typeChart[card.type];
+    const multiplier = (elementMatrix && elementMatrix[gameState.enemy.type]) ? elementMatrix[gameState.enemy.type] : 1;
+
+    damage = Math.floor(damage * multiplier);
+
+    if (multiplier === 2) {
+      showNotification('¡Super Efectivo! (x2)');
+    } else if (multiplier === 0.5) {
+      showNotification('Poco efectivo... (x0.5)');
+    }
   }
 
   if (damage > 0) {
@@ -271,7 +359,7 @@ function playCard(index) {
     gameState.battlesWon += 1;
 
     setTimeout(() => {
-      alert('🏆 ¡Enemigo derrotado! Has ganado la batalla.');
+      showNotification('🏆 ¡Enemigo derrotado! Has ganado la batalla.');
       endCombat();
     }, 300);
   }
@@ -290,9 +378,13 @@ function renderHand() {
     cardEl.style.cursor = 'pointer';
 
     cardEl.innerHTML = `
-      <div class="card-cost">${card.cost}</div>
-      <h4 class="card-title">${card.icon} ${card.name}</h4>
-      <p class="card-text">${card.desc}</p>
+      <img class="card-art" src="img/cards/${card.id}.png" alt="${card.name}" onerror="this.style.display='none';">
+      <div class="card-body">
+        <div class="card-cost">${card.cost}</div>
+        <h4 class="card-title">${card.icon} ${card.name}</h4>
+        <span class="card-type">${card.type}</span>
+        <p class="card-text">${card.desc}</p>
+      </div>
     `;
 
     cardEl.addEventListener('click', () => playCard(index));
@@ -327,5 +419,19 @@ if (exploreBtn) {
 if (endTurnBtn) {
   endTurnBtn.addEventListener("click", playerEndTurn);
 }
+
+if (btnBackToRoles) {
+  btnBackToRoles.addEventListener("click", showRoleSelection);
+}
+
+roleCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    const role = card.dataset.role;
+    if (!role) {
+      return;
+    }
+    openCharacterSelection(role);
+  });
+});
 
 window.gameState = gameState;

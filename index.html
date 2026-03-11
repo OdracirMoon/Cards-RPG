@@ -8,7 +8,24 @@
 </head>
 <body>
   <main id="game-container">
-    <section id="camp-screen" class="screen is-visible">
+    <div id="notification-area" class="notif-container"></div>
+
+    <section id="role-select-screen" class="screen is-visible">
+      <h1 class="screen-title">Elige tu Clase</h1>
+      <div class="role-grid">
+        <div class="role-card" data-role="Guerrero"><h3>⚔️ Guerrero</h3><p>Fuerza y Resistencia</p></div>
+        <div class="role-card" data-role="Arquero"><h3>🏹 Arquero</h3><p>Velocidad y Letalidad</p></div>
+        <div class="role-card" data-role="Mago"><h3>🔮 Mago</h3><p>Poder Magico Arcano</p></div>
+      </div>
+    </section>
+
+    <section id="char-select-screen" class="screen">
+      <h1 class="screen-title">Selecciona tu Heroe</h1>
+      <button id="back-to-roles" class="action-btn" style="margin-bottom: 15px;">⬅ Volver</button>
+      <div id="char-list" class="char-grid"></div>
+    </section>
+
+    <section id="camp-screen" class="screen">
       <h1 class="screen-title">Campamento del Aventurero</h1>
 
       <div class="camp-actions">
@@ -31,6 +48,7 @@
 
       <div class="combat-middle panel">
         <h3 class="player-name">Heroe del Mazo</h3>
+        <div class="player-portrait" aria-label="Placeholder jugador">HEROE</div>
         <div class="player-stats">ATK: 12 | DEF: 6 | Crit: 8%</div>
         <div class="resource-bar hp-bar player-hp">
           <div class="resource-fill" style="width: 88%;"></div>

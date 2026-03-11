@@ -8,30 +8,30 @@ export const SAVE_KEY = 'miniRPG_WorldSave_' + activeSlot;
 export const GAME_VERSION = '1.0.0';
 
 export const skillsData = {
-    'golpe_brutal': { id: 'golpe_brutal', name: 'Golpe Brutal', type: 'special', resource: 'ep', cost: 1, icon: '💥', desc: 'Ataca con el doble de tu fuerza física.', req: null, class: 'Guerrero', cooldown: 2 },
-    'corte_cruzado': { id: 'corte_cruzado', name: 'Corte Cruzado', type: 'special', resource: 'ep', cost: 2, icon: '⚔️', desc: 'Ataque devastador que golpea 3 veces seguidas.', req: 'golpe_brutal', class: 'Guerrero', cooldown: 3 },
-    'grito_guerra': { id: 'grito_guerra', name: 'Grito Guerra', type: 'defensive', resource: 'ep', cost: 1, icon: '🛡️', desc: 'Aumenta enormemente tu defensa por 3 turnos.', req: null, class: 'Guerrero', cooldown: 3 },
-    'piel_hierro': { id: 'piel_hierro', name: 'Piel de Hierro', type: 'defensive', resource: 'ep', cost: 2, icon: '🗿', desc: 'Aumenta tu defensa y cura tus heridas levemente.', req: 'grito_guerra', class: 'Guerrero', cooldown: 4 },
+  'golpe_brutal': { id: 'golpe_brutal', name: 'Golpe Brutal', type: 'Neutral', resource: 'ep', cost: 1, icon: '💥', desc: 'Ataca con el doble de tu fuerza física.', req: null, class: 'Guerrero', cooldown: 2 },
+  'corte_cruzado': { id: 'corte_cruzado', name: 'Corte Cruzado', type: 'Neutral', resource: 'ep', cost: 1, icon: '⚔️', desc: 'Ataque devastador que golpea 3 veces seguidas.', req: 'golpe_brutal', class: 'Guerrero', cooldown: 3 },
+  'grito_guerra': { id: 'grito_guerra', name: 'Grito Guerra', type: 'Neutral', resource: 'ep', cost: 1, icon: '🛡️', desc: 'Aumenta enormemente tu defensa por 3 turnos.', req: null, class: 'Guerrero', cooldown: 3 },
+  'piel_hierro': { id: 'piel_hierro', name: 'Piel de Hierro', type: 'Neutral', resource: 'ep', cost: 1, icon: '🗿', desc: 'Aumenta tu defensa y cura tus heridas levemente.', req: 'grito_guerra', class: 'Guerrero', cooldown: 4 },
 
-    'tiro_doble': { id: 'tiro_doble', name: 'Tiro Doble', type: 'special', resource: 'ep', cost: 12, icon: '🏹', desc: 'Dispara dos flechas rápidas.', req: null, class: 'Arquero', cooldown: 2 },
-    'lluvia_flechas': { id: 'lluvia_flechas', name: 'Lluvia de Flechas', type: 'special', resource: 'ep', cost: 25, icon: '🌧️', desc: 'Dispara una ráfaga que impacta 4 veces al enemigo.', req: 'tiro_doble', class: 'Arquero', cooldown: 4 },
-    'flecha_venenosa': { id: 'flecha_venenosa', name: 'Veneno', type: 'defensive', resource: 'ep', cost: 10, icon: '🐍', desc: 'Inyecta veneno que drena vida por 4 turnos.', req: null, class: 'Arquero', cooldown: 3 },
-    'trampa_espinas': { id: 'trampa_espinas', name: 'Trampa Letal', type: 'defensive', resource: 'ep', cost: 18, icon: '🕸️', desc: 'Veneno doblemente fuerte e inmediato.', req: 'flecha_venenosa', class: 'Arquero', cooldown: 4 },
+  'tiro_doble': { id: 'tiro_doble', name: 'Tiro Doble', type: 'Aire', resource: 'ep', cost: 1, icon: '🏹', desc: 'Dispara dos flechas rápidas.', req: null, class: 'Arquero', cooldown: 2 },
+  'lluvia_flechas': { id: 'lluvia_flechas', name: 'Lluvia de Flechas', type: 'Aire', resource: 'ep', cost: 2, icon: '🌧️', desc: 'Dispara una ráfaga que impacta 4 veces al enemigo.', req: 'tiro_doble', class: 'Arquero', cooldown: 4 },
+  'flecha_venenosa': { id: 'flecha_venenosa', name: 'Veneno', type: 'Tierra', resource: 'ep', cost: 1, icon: '🐍', desc: 'Inyecta veneno que drena vida por 4 turnos.', req: null, class: 'Arquero', cooldown: 3 },
+  'trampa_espinas': { id: 'trampa_espinas', name: 'Trampa Letal', type: 'Tierra', resource: 'ep', cost: 2, icon: '🕸️', desc: 'Veneno doblemente fuerte e inmediato.', req: 'flecha_venenosa', class: 'Arquero', cooldown: 4 },
 
-    'fuego': { id: 'fuego', name: 'Bola de Fuego', type: 'special', resource: 'mp', cost: 12, icon: '🔥', desc: 'Lanza fuego que hace daño mágico moderado.', req: null, class: 'Mago', cooldown: 2 },
-    'meteorito': { id: 'meteorito', name: 'Meteorito', type: 'special', resource: 'mp', cost: 35, icon: '☄️', desc: 'Invoca un meteoro con daño mágico masivo.', req: 'fuego', class: 'Mago', cooldown: 5 },
-    'curar': { id: 'curar', name: 'Curación', type: 'defensive', resource: 'mp', cost: 15, icon: '💚', desc: 'Restaura gran parte de tu salud usando magia.', req: null, class: 'Mago', cooldown: 3 },
-    'drenar_vida': { id: 'drenar_vida', name: 'Drenar Vida', type: 'defensive', resource: 'mp', cost: 25, icon: '🦇', desc: 'Roba vida al enemigo y te cura.', req: 'curar', class: 'Mago', cooldown: 4 }
+  'fuego': { id: 'fuego', name: 'Bola de Fuego', type: 'Fuego', resource: 'mp', cost: 1, icon: '🔥', desc: 'Lanza fuego que hace daño mágico moderado.', req: null, class: 'Mago', cooldown: 2 },
+  'meteorito': { id: 'meteorito', name: 'Meteorito', type: 'Fuego', resource: 'mp', cost: 2, icon: '☄️', desc: 'Invoca un meteoro con daño mágico masivo.', req: 'fuego', class: 'Mago', cooldown: 5 },
+  'curar': { id: 'curar', name: 'Curación', type: 'Agua', resource: 'mp', cost: 1, icon: '💚', desc: 'Restaura gran parte de tu salud usando magia.', req: null, class: 'Mago', cooldown: 3 },
+  'drenar_vida': { id: 'drenar_vida', name: 'Drenar Vida', type: 'Oscuridad', resource: 'mp', cost: 2, icon: '🦇', desc: 'Roba vida al enemigo y te cura.', req: 'curar', class: 'Mago', cooldown: 4 }
 };
 
 export const charactersData = {
-    'caballero': { id: 'caballero', name: 'Caballero Vanguardia', role: 'Guerrero', desc: 'Tanque duro de matar. Excelente armadura y regeneración.', stats: { hp: 80, hpReg: 5, mp: 0, ep: 3, ad: 8, ap: 0, armor: 25, mr: 15, ms: 300, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/guerrero_mapa.png', combat: 'img/player/guerrero_combate.png' }, spriteSheet: 'img/player/caballero_walk.png' }, // 'img/player/caballero_walk.png'
-    'berserker': { id: 'berserker', name: 'Berserker Sediento', role: 'Guerrero', desc: 'Guerrero ofensivo con Robo de Vida base y mucho Daño.', stats: { hp: 90, hpReg: 2, mp: 0, ep: 80, ad: 22, ap: 0, armor: 10, mr: 10, ms: 315, crit: 0.1, lifesteal: 0.05 }, imgs: { map: 'img/player/guerrero_mapa.png', combat: 'img/player/guerrero_combate.png' }, spriteSheet: 'img/player/berserker_walk.png' }, // 'img/player/berserker_walk.png'
-    'cazador': { id: 'cazador', name: 'Cazador Ágil', role: 'Arquero', desc: 'Alta velocidad de ataque y movimiento.', stats: { hp: 70, hpReg: 2, mp: 40, ep: 80, ad: 18, ap: 0, armor: 8, mr: 8, ms: 330, crit: 0.15, lifesteal: 0 }, imgs: { map: 'img/player/arquero_mapa.png', combat: 'img/player/arquero_combate.png' }, spriteSheet: 'img/player/cazador_walk.png' }, // 'img/player/cazador_walk.png'
-    'francotirador': { id: 'francotirador', name: 'Tirador Letal', role: 'Arquero', desc: 'Lento pero letal. Inicia con Letalidad para perforar armaduras.', stats: { hp: 65, hpReg: 1, mp: 60, ep: 50, ad: 25, ap: 0, armor: 5, mr: 5, ms: 290, crit: 0.05, lifesteal: 0 }, imgs: { map: 'img/player/arquero_mapa.png', combat: 'img/player/arquero_combate.png' }, spriteSheet: 'img/player/francotirador_walk.png' }, // 'img/player/francotirador_walk.png'
-    'hechicero': { id: 'hechicero', name: 'Hechicero Arcano', role: 'Mago', desc: 'Maestro del daño mágico explosivo.', stats: { hp: 55, hpReg: 1, mp: 150, ep: 50, ad: 5, ap: 30, armor: 4, mr: 12, ms: 300, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/mago_mapa.png', combat: 'img/player/mago_combate.png' }, spriteSheet: 'img/player/hechicero_walk.png' }, // 'img/player/hechicero_walk.png'
-    'brujo': { id: 'brujo', name: 'Brujo de Sangre', role: 'Mago', desc: 'Mago oscuro que recupera vida al hacer daño.', stats: { hp: 75, hpReg: 3, mp: 100, ep: 50, ad: 8, ap: 20, armor: 8, mr: 15, ms: 295, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/mago_mapa.png', combat: 'img/player/mago_combate.png' }, spriteSheet: 'img/player/brujo_walk.png' }, // 'img/player/brujo_walk.png'
-    'aldeano': { id: 'aldeano', name: 'Aldeano Ahorrador', role: 'Simple', desc: 'Estadísticas mediocres, pero empieza con 200 de Oro.', stats: { hp: 60, hpReg: 1, mp: 20, ep: 40, ad: 8, ap: 8, armor: 5, mr: 5, ms: 300, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/simple_mapa.png', combat: 'img/player/simple_combate.png' }, spriteSheet: 'img/player/aldeano_walk.png' }
+    'caballero': { id: 'caballero', name: 'Caballero Vanguardia', role: 'Guerrero', desc: 'Tanque duro de matar. Excelente armadura y regeneración.', stats: { hp: 80, hpReg: 5, mp: 0, ep: 3, ad: 2, ap: 0, armor: 2, mr: 5, ms: 300, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/guerrero_mapa.png', combat: 'img/player/guerrero_combate.png' }, spriteSheet: 'img/player/caballero_walk.png' }, // 'img/player/caballero_walk.png'
+    'berserker': { id: 'berserker', name: 'Berserker Sediento', role: 'Guerrero', desc: 'Guerrero ofensivo con Robo de Vida base y mucho Daño.', stats: { hp: 90, hpReg: 2, mp: 0, ep: 3, ad: 7, ap: 0, armor: 3, mr: 3, ms: 315, crit: 0.1, lifesteal: 0.05 }, imgs: { map: 'img/player/guerrero_mapa.png', combat: 'img/player/guerrero_combate.png' }, spriteSheet: 'img/player/berserker_walk.png' }, // 'img/player/berserker_walk.png'
+    'cazador': { id: 'cazador', name: 'Cazador Ágil', role: 'Arquero', desc: 'Alta velocidad de ataque y movimiento.', stats: { hp: 70, hpReg: 2, mp: 3, ep: 3, ad: 6, ap: 0, armor: 3, mr: 3, ms: 330, crit: 0.15, lifesteal: 0 }, imgs: { map: 'img/player/arquero_mapa.png', combat: 'img/player/arquero_combate.png' }, spriteSheet: 'img/player/cazador_walk.png' }, // 'img/player/cazador_walk.png'
+    'francotirador': { id: 'francotirador', name: 'Tirador Letal', role: 'Arquero', desc: 'Lento pero letal. Inicia con Letalidad para perforar armaduras.', stats: { hp: 65, hpReg: 1, mp: 3, ep: 3, ad: 8, ap: 0, armor: 2, mr: 2, ms: 290, crit: 0.05, lifesteal: 0 }, imgs: { map: 'img/player/arquero_mapa.png', combat: 'img/player/arquero_combate.png' }, spriteSheet: 'img/player/francotirador_walk.png' }, // 'img/player/francotirador_walk.png'
+    'hechicero': { id: 'hechicero', name: 'Hechicero Arcano', role: 'Mago', desc: 'Maestro del daño mágico explosivo.', stats: { hp: 55, hpReg: 1, mp: 3, ep: 3, ad: 2, ap: 10, armor: 1, mr: 4, ms: 300, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/mago_mapa.png', combat: 'img/player/mago_combate.png' }, spriteSheet: 'img/player/hechicero_walk.png' }, // 'img/player/hechicero_walk.png'
+    'brujo': { id: 'brujo', name: 'Brujo de Sangre', role: 'Mago', desc: 'Mago oscuro que recupera vida al hacer daño.', stats: { hp: 75, hpReg: 3, mp: 3, ep: 3, ad: 3, ap: 7, armor: 3, mr: 5, ms: 295, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/mago_mapa.png', combat: 'img/player/mago_combate.png' }, spriteSheet: 'img/player/brujo_walk.png' }, // 'img/player/brujo_walk.png'
+    'aldeano': { id: 'aldeano', name: 'Aldeano Ahorrador', role: 'Simple', desc: 'Estadísticas mediocres, pero empieza con 200 de Oro.', stats: { hp: 60, hpReg: 1, mp: 3, ep: 3, ad: 3, ap: 3, armor: 2, mr: 2, ms: 300, crit: 0, lifesteal: 0 }, imgs: { map: 'img/player/simple_mapa.png', combat: 'img/player/simple_combate.png' }, spriteSheet: 'img/player/aldeano_walk.png' }
 };
 
 export const MAP_W = 100; 
@@ -45,7 +45,7 @@ export const npcsData = [
 
 // NUEVOS ÍTEMS CON ESTADÍSTICAS MOBA
 export const mapData = [
-    { rarity: 'Común', css: 'rarity-comun', colorClass: 'color-comun', colorHex: '#888', recLevel: '1-3', newEnemies: [{ name: 'Slime', hp: 40, atk: 5, def: 2, mag: 3, gold: 3, xp: 4, crit: 0.05, img: 'img/enemies/green_slime.png', spriteSheet: 'img/enemies/green_slime.png' }, { name: 'Rata', hp: 35, atk: 7, def: 1, mag: 0, gold: 3, xp: 4, crit: 0.03, img: 'img/enemies/rat.png', spriteSheet: 'img/enemies/rat.png' }], boss: { name: 'Slime Gigante', hp: 120, atk: 10, def: 5, mag: 6, trait: 'regen', gold: 25, xp: 25, img: 'img/bosses/giant_slime.png', spriteSheet: 'img/bosses/giant_slime.png' }, 
+    { rarity: 'Común', css: 'rarity-comun', colorClass: 'color-comun', colorHex: '#888', recLevel: '1-3', newEnemies: [{ name: 'Slime', type: 'Agua', hp: 20, atk: 3, def: 2, mag: 2, gold: 3, xp: 4, crit: 0.05, img: 'img/enemies/green_slime.png', spriteSheet: 'img/enemies/green_slime.png' }, { name: 'Rata', type: 'Neutral', hp: 18, atk: 4, def: 1, mag: 2, gold: 3, xp: 4, crit: 0.03, img: 'img/enemies/rat.png', spriteSheet: 'img/enemies/rat.png' }], boss: { name: 'Slime Gigante', type: 'Agua', hp: 60, atk: 5, def: 5, mag: 2, trait: 'regen', gold: 25, xp: 25, img: 'img/bosses/giant_slime.png', spriteSheet: 'img/bosses/giant_slime.png' }, 
       shop: { 
         weapons: [
             { name: 'Daga Oxidada', ad: 4, ap: 0, crit: 0.05, lifesteal: 0.02, lethality: 0, magicPen: 0, price: 30, icon: 'iron_dagger.png' },
@@ -60,7 +60,7 @@ export const mapData = [
         accessories: []
       } 
     },
-    { rarity: 'Poco Común', css: 'rarity-pococomun', colorClass: 'color-pococomun', colorHex: '#4caf50', recLevel: '4-6', newEnemies: [{ name: 'Goblin', hp: 40, atk: 16, def: 4, mag: 0, gold: 6, xp: 8, crit: 0.1, img: 'img/enemies/goblin.png', spriteSheet: 'img/enemies/goblin.png' }, { name: 'Asesino Goblin', hp: 35, atk: 18, def: 3, mag: 0, evasion: 0.3, gold: 8, xp: 10, img: 'img/enemies/goblin_assassin.png', spriteSheet: 'img/enemies/goblin_assassin.png' }], boss: { name: 'Rey Goblin', hp: 120, atk: 24, def: 6, mag: 6, trait: 'crit', gold: 60, xp: 40, img: 'img/bosses/king_goblin.png', spriteSheet: 'img/bosses/king_goblin.png' }, 
+    { rarity: 'Poco Común', css: 'rarity-pococomun', colorClass: 'color-pococomun', colorHex: '#4caf50', recLevel: '4-6', newEnemies: [{ name: 'Goblin', type: 'Tierra', hp: 20, atk: 5, def: 4, mag: 2, gold: 6, xp: 8, crit: 0.1, img: 'img/enemies/goblin.png', spriteSheet: 'img/enemies/goblin.png' }, { name: 'Asesino Goblin', hp: 18, atk: 6, def: 3, mag: 2, evasion: 0.3, gold: 8, xp: 10, img: 'img/enemies/goblin_assassin.png', spriteSheet: 'img/enemies/goblin_assassin.png' }], boss: { name: 'Rey Goblin', type: 'Tierra', hp: 60, atk: 8, def: 6, mag: 2, trait: 'crit', gold: 60, xp: 40, img: 'img/bosses/king_goblin.png', spriteSheet: 'img/bosses/king_goblin.png' }, 
       shop: { 
         weapons: [
             { name: 'Espada Larga', ad: 10, ap: 0, crit: 0.1, lifesteal: 0.05, lethality: 0, magicPen: 0, price: 90, icon: 'steel_sword.png' },
@@ -75,7 +75,7 @@ export const mapData = [
         accessories: []
       } 
     },
-    { rarity: 'Raro', css: 'rarity-raro', colorClass: 'color-raro', colorHex: '#2196f3', recLevel: '7-10', newEnemies: [{ name: 'Lobo Oscuro', hp: 40, atk: 18, def: 3, mag: 0, crit: 0.1, gold: 12, xp: 14, img: 'img/enemies/dark_wolf.png', spriteSheet: 'img/enemies/dark_wolf.png' }, { name: 'Caballero de Piedra', hp: 80, atk: 15, def: 50, mr: 0, gold: 15, xp: 18, img: 'img/enemies/stone_knight.png', spriteSheet: 'img/enemies/stone_knight.png' }], boss: { name: 'Bestia Alfa', hp: 150, atk: 25, def: 6, mag: 8, trait: 'berserk', gold: 120, xp: 80, img: 'img/bosses/alpha_beast.png', spriteSheet: 'img/bosses/alpha_beast.png' }, 
+    { rarity: 'Raro', css: 'rarity-raro', colorClass: 'color-raro', colorHex: '#2196f3', recLevel: '7-10', newEnemies: [{ name: 'Lobo Oscuro', hp: 20, atk: 6, def: 3, mag: 2, crit: 0.1, gold: 12, xp: 14, img: 'img/enemies/dark_wolf.png', spriteSheet: 'img/enemies/dark_wolf.png' }, { name: 'Caballero de Piedra', hp: 40, atk: 5, def: 50, mr: 0, gold: 15, xp: 18, img: 'img/enemies/stone_knight.png', spriteSheet: 'img/enemies/stone_knight.png' }], boss: { name: 'Bestia Alfa', hp: 75, atk: 8, def: 6, mag: 3, trait: 'berserk', gold: 120, xp: 80, img: 'img/bosses/alpha_beast.png', spriteSheet: 'img/bosses/alpha_beast.png' }, 
       shop: { 
         weapons: [
             { name: 'Mandoble del León', ad: 18, ap: 0, crit: 0.15, lifesteal: 0.08, lethality: 0, magicPen: 0, price: 250, icon: 'long_sword.png' },
@@ -90,7 +90,7 @@ export const mapData = [
         accessories: []
       } 
     },
-    { rarity: 'Épico', css: 'rarity-epico', colorClass: 'color-epico', colorHex: '#9c27b0', recLevel: '11-15', newEnemies: [{ name: 'Caballero Maldito', hp: 65, atk: 25, def: 6, mag: 10, lifesteal: 0.05, gold: 25, xp: 28, img: 'img/enemies/cursed_knight.png', spriteSheet: 'img/enemies/cursed_knight.png' }, { name: 'Espectro', hp: 50, atk: 20, def: 5, mr: 50, manaBurn: 15, gold: 30, xp: 35, img: 'img/enemies/specter.png', spriteSheet: 'img/enemies/specter.png' }], boss: { name: 'Caballero Oscuro', hp: 250, atk: 35, def: 10, mag: 15, trait: 'spiked', gold: 250, xp: 150, img: 'img/bosses/dark_knight.png', spriteSheet: 'img/bosses/dark_knight.png' }, 
+    { rarity: 'Épico', css: 'rarity-epico', colorClass: 'color-epico', colorHex: '#9c27b0', recLevel: '11-15', newEnemies: [{ name: 'Caballero Maldito', hp: 33, atk: 8, def: 6, mag: 3, lifesteal: 0.05, gold: 25, xp: 28, img: 'img/enemies/cursed_knight.png', spriteSheet: 'img/enemies/cursed_knight.png' }, { name: 'Espectro', hp: 25, atk: 7, def: 5, mr: 50, manaBurn: 15, gold: 30, xp: 35, img: 'img/enemies/specter.png', spriteSheet: 'img/enemies/specter.png' }], boss: { name: 'Caballero Oscuro', hp: 125, atk: 12, def: 10, mag: 5, trait: 'spiked', gold: 250, xp: 150, img: 'img/bosses/dark_knight.png', spriteSheet: 'img/bosses/dark_knight.png' }, 
       shop: { 
         weapons: [
             { name: 'Hoja del Vacío', ad: 30, ap: 0, crit: 0.20, lifesteal: 0.12, lethality: 5, magicPen: 0, price: 750, icon: 'dark_greatsword.png' },
@@ -111,7 +111,7 @@ export const mapData = [
         ] 
       } 
     },
-    { rarity: 'Legendario', css: 'rarity-legendario', colorClass: 'color-legendario', colorHex: '#ff9800', recLevel: '16-20', newEnemies: [{ name: 'Demonio', hp: 100, atk: 35, def: 8, mag: 20, gold: 50, xp: 60, img: 'img/enemies/infernal_demon.png', spriteSheet: 'img/enemies/infernal_demon.png' }], boss: { name: 'Señor Demonio', hp: 450, atk: 50, def: 15, mag: 25, trait: 'vampire', gold: 500, xp: 300, img: 'img/bosses/lord_demon.png', spriteSheet: 'img/bosses/lord_demon.png' }, 
+    { rarity: 'Legendario', css: 'rarity-legendario', colorClass: 'color-legendario', colorHex: '#ff9800', recLevel: '16-20', newEnemies: [{ name: 'Demonio', hp: 50, atk: 12, def: 8, mag: 7, gold: 50, xp: 60, img: 'img/enemies/infernal_demon.png', spriteSheet: 'img/enemies/infernal_demon.png' }], boss: { name: 'Señor Demonio', hp: 225, atk: 17, def: 15, mag: 8, trait: 'vampire', gold: 500, xp: 300, img: 'img/bosses/lord_demon.png', spriteSheet: 'img/bosses/lord_demon.png' }, 
       shop: { 
         weapons: [
             { name: 'Hacha Infernal', ad: 50, ap: 0, crit: 0.25, lifesteal: 0.15, lethality: 10, magicPen: 0, price: 2200, icon: 'chaos_axe.png' },
@@ -126,7 +126,7 @@ export const mapData = [
         accessories: []
       } 
     },
-    { rarity: 'Mítico', css: 'rarity-mitico', colorClass: 'color-mitico', colorHex: '#ffeb3b', recLevel: '21+', newEnemies: [{ name: 'Dragón Antiguo', hp: 180, atk: 50, def: 12, mag: 30, gold: 100, xp: 120, img: 'img/enemies/dragon.png', spriteSheet: 'img/enemies/dragon.png' }], boss: { name: 'Dragón Dorado', hp: 800, atk: 70, def: 25, mag: 40, trait: 'regen', gold: 1000, xp: 600, img: 'img/bosses/golden_dragon.png', spriteSheet: 'img/bosses/golden_dragon.png' }, 
+    { rarity: 'Mítico', css: 'rarity-mitico', colorClass: 'color-mitico', colorHex: '#ffeb3b', recLevel: '21+', newEnemies: [{ name: 'Dragón Antiguo', hp: 90, atk: 17, def: 12, mag: 10, gold: 100, xp: 120, img: 'img/enemies/dragon.png', spriteSheet: 'img/enemies/dragon.png' }], boss: { name: 'Dragón Dorado', hp: 400, atk: 23, def: 25, mag: 13, trait: 'regen', gold: 1000, xp: 600, img: 'img/bosses/golden_dragon.png', spriteSheet: 'img/bosses/golden_dragon.png' }, 
       shop: { 
         weapons: [
             { name: 'Lanza Divina', ad: 80, ap: 0, crit: 0.35, lifesteal: 0.20, lethality: 20, magicPen: 0, price: 6500, icon: 'divine_spear.png' },
@@ -204,6 +204,15 @@ export const combatFormulas = {
     // Robo de vida
     lifestealHealPercent: 1, // heal = dmg * lifesteal
     omnivampHealPercent: 1, // heal = dmg * omnivamp
+    typeChart: {
+      'Agua': { 'Fuego': 2, 'Tierra': 2, 'Aire': 0.5 },
+      'Tierra': { 'Fuego': 2, 'Oscuridad': 2, 'Agua': 0.5 },
+      'Fuego': { 'Aire': 2, 'Luz': 2, 'Agua': 0.5 },
+      'Aire': { 'Agua': 2, 'Tierra': 2, 'Fuego': 0.5 },
+      'Oscuridad': { 'Luz': 2, 'Fuego': 0.5 },
+      'Luz': { 'Oscuridad': 2, 'Tierra': 0.5 },
+      'Neutral': { 'Oscuridad': 0.5 }
+    },
     // reducción de enfriamientos basada en Ability Haste
     cooldownReductionMultiplier: (haste) => 100 / (100 + haste)
 };
