@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards RPG - Base UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game-container">
+    <section id="camp-screen" class="screen is-visible">
+      <h1 class="screen-title">Campamento del Aventurero</h1>
+
+      <div class="camp-actions">
+        <button class="action-btn">⚔️ Explorar</button>
+        <button class="action-btn">💰 Tienda</button>
+        <button class="action-btn">📜 Misiones</button>
+        <button class="action-btn">🃏 Ver Mazo</button>
+      </div>
+    </section>
+
+    <section id="combat-screen" class="screen">
+      <div class="combat-top panel">
+        <h2 class="enemy-name">Goblin Sombra</h2>
+        <div class="enemy-portrait" aria-label="Placeholder enemigo">ENEMIGO</div>
+        <div class="resource-bar hp-bar enemy-hp">
+          <div class="resource-fill" style="width: 72%;"></div>
+          <span>HP: 72 / 100</span>
+        </div>
+      </div>
+
+      <div class="combat-middle panel">
+        <h3 class="player-name">Heroe del Mazo</h3>
+        <div class="player-stats">ATK: 12 | DEF: 6 | Crit: 8%</div>
+        <div class="resource-bar hp-bar player-hp">
+          <div class="resource-fill" style="width: 88%;"></div>
+          <span>HP: 88 / 100</span>
+        </div>
+        <div class="resource-bar mana-bar player-mana">
+          <div class="resource-fill" style="width: 60%;"></div>
+          <span>Energia: 3 / 5</span>
+        </div>
+        <button id="end-turn-btn" class="action-btn" style="margin-top: 10px; width: 100%; font-size: 0.9rem;">⏳ Terminar Turno</button>
+      </div>
+
+      <div class="combat-bottom panel">
+        <div id="deck-pile" class="pile" aria-label="Mazo">20</div>
+
+        <div id="hand" aria-label="Mano del jugador">
+          <article class="card">
+            <div class="card-cost">1</div>
+            <h4 class="card-title">Corte Rapido</h4>
+            <p class="card-text">Inflige 7 de dano.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-cost">2</div>
+            <h4 class="card-title">Bloqueo Firme</h4>
+            <p class="card-text">Obtienes 10 de escudo.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-cost">1</div>
+            <h4 class="card-title">Chispa Arcana</h4>
+            <p class="card-text">Inflige 5 de dano y roba 1 carta.</p>
+          </article>
+        </div>
+
+        <div id="discard-pile" class="pile" aria-label="Descarte">5</div>
+      </div>
+    </section>
+  </main>
+</body>
+<script src="main.js" type="module"></script>
+</html>
